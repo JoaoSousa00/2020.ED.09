@@ -113,9 +113,9 @@ public class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
         String res = "";
         try {
             Iterator<T> it = this.iteratorLevelOrder();
-            
-            while (it.hasNext()){
-                res+=it.next();
+
+            while (it.hasNext()) {
+                res += it.next();
             }
         } catch (EmptyCollectionException ex) {
             return "Empty Collectio";
@@ -123,8 +123,6 @@ public class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
         return res;
     }
 
-    
-    
     @Override
     public Iterator<T> iteratorInOrder() {
         ArrayUnorderedList<T> tempList = new ArrayUnorderedList<T>();
@@ -197,8 +195,7 @@ public class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
     @Override
     public Iterator<T> iteratorLevelOrder() throws EmptyCollectionException {
         ArrayUnorderedList<T> tempList = new ArrayUnorderedList<>();
-        LinkedQueue<T> tempQueue = new LinkedQueue<>();
-        levelorder(root, tempQueue, tempList);
+        levelorder(root, tempList);
 
         return tempList.iterator();
     }
@@ -207,24 +204,24 @@ public class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
      * Performs a recursive levelorder traversal.
      *
      * @param node the node to be used as the root for this traversal
-     * @param tempQueue the temporary list for use in this traversal
      * @param tempList
      * @throws Exceptions.EmptyCollectionException
      */
-    protected void levelorder(BinaryTreeNode<T> node,
-            LinkedQueue<T> tempQueue, ArrayUnorderedList<T> tempList)
+    protected void levelorder(BinaryTreeNode<T> node, ArrayUnorderedList<T> tempList)
             throws EmptyCollectionException {
+
+        LinkedQueue<BinaryTreeNode<T>> tempQueue = new LinkedQueue<>();
         if (node != null) {
-            tempQueue.enqueue(node.getElement());
+            tempQueue.enqueue(node);
             while (!tempQueue.isEmpty()) {
-                T temp = tempQueue.dequeue();
-                tempList.addToRear(temp);
+                BinaryTreeNode<T> temp = tempQueue.dequeue();
+                tempList.addToRear(temp.getElement());
                 if (node.numChildren() > 0) {
                     if (node.getLeft() != null) {
-                        tempQueue.enqueue(node.getLeft().getElement());
+                        tempQueue.enqueue(node.getLeft());
                     }
                     if (node.getRight() != null) {
-                        tempQueue.enqueue(node.getRight().getElement());
+                        tempQueue.enqueue(node.getRight());
                     }
                 }
 

@@ -165,25 +165,50 @@ public class LinkedBinarySearchTree<T> extends LinkedBinaryTree<T>
     public T removeMin() {
         T res = null;
         try {
-            return removeElement(findMin());
+            res = removeElement(findMin());
         } catch (ElementNotFoundException ex) {
             Logger.getLogger(LinkedBinarySearchTree.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return res;
     }
 
     @Override
     public T removeMax() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        T res = null;
+        try {
+            res = removeElement(findMax());
+        } catch (ElementNotFoundException ex) {
+            Logger.getLogger(LinkedBinarySearchTree.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return res;
     }
 
     @Override
     public T findMin() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        BinaryTreeNode tmp = root;
+        if (root != null) {
+            return null;
+        } else {
+            while (tmp.getLeft() != null) {
+                tmp = tmp.getLeft();
+            }
+        }
+
+        return (T) tmp.getElement();
     }
 
     @Override
     public T findMax() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        BinaryTreeNode tmp = root;
+        if (root == null) {
+            return null;
+        } else {
+            while (tmp.getRight() != null) {
+                tmp = tmp.getRight();
+            }
+        }
+        return (T) tmp.getElement();
     }
 
 }
