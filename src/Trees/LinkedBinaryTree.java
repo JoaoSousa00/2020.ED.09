@@ -48,7 +48,7 @@ public class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
 
     @Override
     public T getRoot() {
-        return (T) root.getElement();
+        return (isEmpty()) ? null : (T) root.getElement();
     }
 
     @Override

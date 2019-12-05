@@ -187,7 +187,7 @@ public class LinkedBinarySearchTree<T> extends LinkedBinaryTree<T>
     @Override
     public T findMin() {
         BinaryTreeNode tmp = root;
-        if (root != null) {
+        if (root == null) {
             return null;
         } else {
             while (tmp.getLeft() != null) {
