@@ -157,31 +157,17 @@ public class LinkedBinarySearchTree<T> extends LinkedBinaryTree<T>
             if (removeElement(targetElement) != null) {
                 removeAllOccurrences(targetElement);
             }
-        } catch (ElementNotFoundException ex) {
-        }
+        } catch (ElementNotFoundException ex) {}
     }
 
     @Override
-    public T removeMin() {
-        T res = null;
-        try {
-            res = removeElement(findMin());
-        } catch (ElementNotFoundException ex) {
-            Logger.getLogger(LinkedBinarySearchTree.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return res;
+    public T removeMin() throws ElementNotFoundException {
+        return removeElement(findMin());
     }
 
     @Override
-    public T removeMax() {
-        T res = null;
-        try {
-            res = removeElement(findMax());
-        } catch (ElementNotFoundException ex) {
-            Logger.getLogger(LinkedBinarySearchTree.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return res;
+    public T removeMax() throws ElementNotFoundException {
+        return removeElement(findMax());
     }
 
     @Override

@@ -2,6 +2,8 @@ package Trees;
 
 import Exceptions.ElementNotFoundException;
 import Interfaces.BinarySearchTreeADT;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * <h3>
@@ -110,17 +112,21 @@ public class ArrayBinarySearchTree<T> extends ArrayBinaryTree<T>
 
     @Override
     public void removeAllOccurrences(T targetElement) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            while (removeElement(targetElement) != null) {
+                removeAllOccurrences(targetElement);
+            }
+        } catch (ElementNotFoundException ex) {}
     }
 
     @Override
-    public T removeMin() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public T removeMin() throws ElementNotFoundException {
+        return removeElement(findMin());
     }
 
     @Override
-    public T removeMax() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public T removeMax() throws ElementNotFoundException {
+        return removeElement(findMax());
     }
 
     @Override

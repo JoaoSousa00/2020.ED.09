@@ -29,6 +29,7 @@ public interface BinarySearchTreeADT<T> extends BinaryTreeADT<T> {
      *
      * @param targetElement the element to be removed from this tree
      * @return the element removed from this tree
+     * @throws Exceptions.ElementNotFoundException
      */
     public T removeElement(T targetElement) throws ElementNotFoundException;
 
@@ -37,6 +38,7 @@ public interface BinarySearchTreeADT<T> extends BinaryTreeADT<T> {
      *
      * @param targetElement the element that the list will have all instances of
      * it removed
+     * @throws Exceptions.ElementNotFoundException
      */
     public void removeAllOccurrences(T targetElement);
 
@@ -44,15 +46,17 @@ public interface BinarySearchTreeADT<T> extends BinaryTreeADT<T> {
      * Removes and returns the smallest element from this tree.
      *
      * @return the smallest element from this tree.
+     * @throws Exceptions.ElementNotFoundException
      */
-    public T removeMin();
+    public T removeMin() throws ElementNotFoundException;
 
     /**
      * Removes and returns the largest element from this tree.
      *
      * @return the largest element from this tree
+     * @throws Exceptions.ElementNotFoundException
      */
-    public T removeMax();
+    public T removeMax() throws ElementNotFoundException;
 
     /**
      * Returns a reference to the smallest element in this tree.
