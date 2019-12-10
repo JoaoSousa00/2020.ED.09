@@ -197,4 +197,13 @@ public class ArrayBinaryTree<T> implements BinaryTreeADT<T> {
             }
         }
     } //Funfa!?
+    
+    /**
+     * Expands the capacity of the array adding the DEFAULT_CAPACITY.
+     */
+    protected void expandCapacity() {
+        T[] newArray = (T[]) new Object[size() + CAPACITY];
+        System.arraycopy(tree, 0, newArray, 0, size());
+        tree = newArray;
+    }
 }
