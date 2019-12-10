@@ -35,25 +35,28 @@ public class Test1 {
                 switch (b) {
                     case 1:
                         LinkedBinarySearchTree<Integer> lista = new LinkedBinarySearchTree<>();
-                        lista.contains(2);
-//                        try {
-//                            lista.find(3);
-//                        } catch (ElementNotFoundException ex) {
-//                            System.err.println("Método find não encontrou o elemento.");
-//                        }
-                        lista.findMax();
-                        lista.findMin();
-                        lista.getRoot();
-                        lista.isEmpty();
-                        lista.removeMin();
-                        lista.removeMax();
-//                        try {
-//                            lista.removeElement(1);
-//                        } catch (ElementNotFoundException ex) {
-//                            System.err.println("Método removeElement não encontrou o elemento.");
-//                        }
-                        lista.removeAllOccurrences(3);
-                        lista.size();
+                        System.out.println(lista.contains(2));
+                        try {
+                            System.out.println(lista.find(3));
+
+                        } catch (ElementNotFoundException ex) {
+                            System.err.println("Método find não encontrou o elemento.");
+
+                            System.out.println(lista.findMax());
+                            System.out.println(lista.findMin());
+                            System.out.println(lista.getRoot());
+                            System.out.println(lista.isEmpty());
+                            System.out.println(lista.removeMin());
+                            System.out.println(lista.removeMax());
+                            try {
+                                System.out.println(lista.removeElement(1));
+                            } catch (ElementNotFoundException ex1) {
+                                System.err.println("Não devia...");
+                            }
+                            lista.removeAllOccurrences(3);
+                            System.out.println(lista.size());
+
+                        }
                         break;
 
                     case 2:
