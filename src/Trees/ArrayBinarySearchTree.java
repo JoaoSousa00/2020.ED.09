@@ -235,8 +235,10 @@ public class ArrayBinarySearchTree<T> extends ArrayBinaryTree<T>
     public T findMin() {
         Comparable<T> min = (Comparable<T>) getRoot();
         for (int i = 1; i < tree.length; i++) {
-            if (min.compareTo(tree[i]) > 0) {
-                min = (Comparable<T>) tree[i];
+            if (tree[i] != null) {
+                if (min.compareTo(tree[i]) > 0) {
+                    min = (Comparable<T>) tree[i];
+                }
             }
         }
         return (T) min;
@@ -245,9 +247,11 @@ public class ArrayBinarySearchTree<T> extends ArrayBinaryTree<T>
     @Override
     public T findMax() {
         Comparable<T> max = (Comparable<T>) getRoot();
-        for (int i = 1; i < tree.length; i++) {
-            if (max.compareTo(tree[i]) < 0) {
-                max = (Comparable<T>) tree[i];
+        for (int i = 0; i < tree.length; i++) {
+            if (tree[i] != null) {
+                if (max.compareTo(tree[i]) < 0) {
+                    max = (Comparable<T>) tree[i];
+                }
             }
         }
         return (T) max;

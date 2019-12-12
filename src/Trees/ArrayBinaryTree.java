@@ -22,6 +22,7 @@ import java.util.Iterator;
  * <strong>Description: </strong><br>
  * Class that represents
  * </p>
+ * @param <T>
  */
 
 public class ArrayBinaryTree<T> implements BinaryTreeADT<T> {
@@ -58,6 +59,7 @@ public class ArrayBinaryTree<T> implements BinaryTreeADT<T> {
      * @return true if the element is in the tree
      * @throws ElementNotFoundException if an element not found exception occurs
      */
+    @Override
     public T find(T targetElement) throws ElementNotFoundException {
         T temp = null;
         boolean found = false;
