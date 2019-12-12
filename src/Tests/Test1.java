@@ -3,8 +3,6 @@ package Tests;
 import Exceptions.ElementNotFoundException;
 import Trees.LinkedBinarySearchTree;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * <h3>

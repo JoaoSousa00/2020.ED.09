@@ -2,8 +2,6 @@ package Trees;
 
 import Exceptions.ElementNotFoundException;
 import Interfaces.BinarySearchTreeADT;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * <h3>
@@ -60,6 +58,7 @@ public class ArrayBinarySearchTree<T> extends ArrayBinaryTree<T>
      *
      * @param element the element to be added to the search tree
      */
+    @Override
     public void addElement(T element) {
         if (tree.length < maxIndex * 2 + 3) {
             expandCapacity();
@@ -107,7 +106,109 @@ public class ArrayBinarySearchTree<T> extends ArrayBinaryTree<T>
 
     @Override
     public T removeElement(T targetElement) throws ElementNotFoundException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        T result = null;
+        int root = 0;
+        if (!isEmpty()) {
+            //Se for o root
+            if (((Comparable) targetElement).equals(tree[root])) {
+                result = tree[root];
+                tree[root] = replacement(root);
+                count--;
+            } else { //Se não for o root
+                int current, parent = root;
+                boolean found = false;
+                if (((Comparable) targetElement).compareTo(root) < 0) {
+                    current = root * 2 + 1; //Esquerda
+                } else {
+                    current = (root + 1) * 2; //Direita 
+                }
+                while (tree[current] != null && !found) {
+                    if (targetElement.equals(tree[current])) {
+                        result = tree[current];
+                        found = true;
+                        tree[current] = replacement(current);
+                        count--;
+
+                    } else {
+                        parent = current;
+                        if (((Comparable) targetElement).compareTo(tree[current]) < 0) {
+                            current = current * 2 + 1;
+                        } else {
+                            current = (current + 1) * 2;
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
+    protected T replacement(int current) {
+        T result = null;
+        boolean done = false;
+        //Se a árvore só tinha o root
+        if ((tree[current * 2 + 1] == null) && (tree[(current + 1) * 2] == null)) {
+            done = true; //Acaba aqui
+        }
+        while (!done) {
+            if ((tree[current * 2 + 1] != null) && (tree[(current + 1) * 2] == null)) {
+
+                result = tree[current * 2 + 1];
+
+                if ((tree[(current * 2 + 1) * 2 + 1] != null) || (tree[((current * 2 + 1) + 1) * 2] != null)) {
+                    //recursivo para puxar o resto dos elementos para o sitio certo
+                    tree[current * 2 + 1] = replacement(current * 2 + 1);
+                } else {
+                    tree[current * 2 + 1] = null;
+                }
+
+                done = true; //Acaba aqui
+            } else if ((tree[current * 2 + 1] == null) && (tree[(current + 1) * 2] != null)) {
+
+                result = tree[(current + 1) * 2];
+
+                if (tree[((current + 1) * 2) * 2 + 1] != null || tree[(((current + 1) * 2) + 1) * 2] != null) {
+                    //recursivo para puxar o resto dos elementos para o sitio certo
+                    tree[(current + 1) * 2] = replacement((current + 1) * 2);
+                } else {
+                    tree[(current + 1) * 2] = null;
+                }
+
+                done = true;
+                //Não percebi \/\/\/
+            } else {
+                int currentDireita = (current + 1) * 2;
+                int currentEsquerda = current * 2 + 1;
+                if (tree[currentDireita * 2 + 1] != null && tree[(currentEsquerda + 1) * 2] == null) {
+                    result = tree[currentDireita];
+                    tree[currentDireita] = replacement(currentDireita);
+                    //Acaba por aqui
+                    done = true;
+
+                } else if (tree[currentDireita * 2 + 1] != null && tree[(currentEsquerda + 1) * 2] == null) {
+                    result = tree[currentDireita * 2 + 1];
+                    tree[currentDireita * 2 + 1] = replacement(currentDireita * 2 + 1);
+
+                    //Acaba por aqui
+                    done = true;
+
+                } else if (tree[currentDireita * 2 + 1] == null && tree[(currentEsquerda + 1) * 2] == null) {
+                    result = tree[currentDireita];
+                    tree[currentDireita] = null;
+
+                    //Acaba por aqui
+                    done = true;
+                } else {
+                    result = tree[currentDireita * 2 + 1];
+                    tree[currentDireita * 2 + 1] = replacement(currentDireita * 2 + 1);
+
+                    //Acaba por aqui
+                    done = true;
+                }
+            }
+        }
+
+        return result;
     }
 
     @Override
@@ -116,7 +217,8 @@ public class ArrayBinarySearchTree<T> extends ArrayBinaryTree<T>
             while (removeElement(targetElement) != null) {
                 removeAllOccurrences(targetElement);
             }
-        } catch (ElementNotFoundException ex) {}
+        } catch (ElementNotFoundException ex) {
+        }
     }
 
     @Override
