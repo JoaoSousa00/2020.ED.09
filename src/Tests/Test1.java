@@ -171,7 +171,8 @@ public class Test1 {
                         lista3.addElement(5);
 
                         System.out.println("Size| Should be 6 and is ... " + lista3.size());
-                        //System.out.println("Find| Should return 4 and returns ... " + lista3.find(4));//Erro
+                        System.out.println("Contains| Should be true and is ... " + lista3.contains(4));
+                        System.out.println("Find| Should return 4 and returns ... " + lista3.find(4));
                         System.out.println("FindMax| Should return 7 and returns ... " + lista3.findMax());
                         System.out.println("FindMin| Should return 1 and returns ... " + lista3.findMin());
                         System.out.println("GetRoot| Should return 5 and returns ... " + lista3.getRoot());

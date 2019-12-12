@@ -64,7 +64,7 @@ public class ArrayBinaryTree<T> implements BinaryTreeADT<T> {
         T temp = null;
         boolean found = false;
 
-        for (int ct = 0; ct < count && !found; ct++) {
+        for (int ct = 0; ct < tree.length && !found; ct++) {
             if (targetElement.equals(tree[ct])) {
                 found = true;
                 temp = tree[ct];
